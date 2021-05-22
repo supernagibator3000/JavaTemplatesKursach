@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaTemplates</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <div>
+        <div class="dashboard_rules" sec:authorize="!isAuthenticated()">
+            <a href="/login">Войти</a><br>
+            <a href="/signUp">Зарегистрироваться</a>
+        </div>
+        <div class="dashboard_rules" sec:authorize="isAuthenticated()">
+            <a href="/profile">Личный кабинет</a><br>
+            <a href="/shop">Товары</a><br>
+            <a href="/cart">Корзина</a><br>
+            <a href="/logout">Выйти</a>
+        </div>
+        <div class="dashboard_rules" sec:authorize="hasRole('ADMIN')">
+            <a href="/admin">Кабинет администратора</a>
+        </div>
+    </div>
+    <br>
+    <div>
+        Добро пожаловать на официальный сайт магазина компьютерных комплектующих "JavaTemplates".
+    </div>
+</body>
+</html>

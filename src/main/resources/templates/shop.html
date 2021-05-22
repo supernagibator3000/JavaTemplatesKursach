@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Товары</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <div>
+        <a href="/">Главная</a><br>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <a href="/profile">Личный кабинет</a><br>
+        <a href="/cart">Корзина</a><br>
+        <a href="/logout">Выйти</a>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <a href="/admin">Кабинет администратора</a>
+    </div>
+    <div>
+        <h3>Товары</h3>
+        <table>
+            <thead>
+            <th scope="col">Название</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Описание</th>
+            </thead>
+            <th:block th:each="item: ${items}">
+                <tr>
+                    <td th:text="${item.getName()}"></td>
+                    <td th:text="${item.getPrice()}"></td>
+                    <td th:text="${item.getDescription()}"></td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="itemId" th:value="${item.getId()}"/>
+                            <input type="hidden" name="action" th:value="addToCart"/>
+                            <button type="submit" class="btn btn-danger">Добавить в корзину</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</body>
+</html>

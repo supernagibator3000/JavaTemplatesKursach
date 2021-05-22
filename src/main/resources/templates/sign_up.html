@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div>
+        <a href="/">Назад</a>
+    </div>
+    <div class="text-center">
+        <form method="POST">
+            <h2>Регистрация</h2>
+            <div>
+                <label>
+                    <input type="text" name="username" placeholder="Имя">
+                </label>
+                <h3 th:text="${usernameError}"></h3>
+            </div>
+            <div>
+                <label>
+                    <input type="email" name="email" placeholder="Email">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="password" name="password" placeholder="Пароль">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="password" name="passwordConfirm" placeholder="Подтвердите пароль">
+                </label>
+                <h3 th:text="${passwordError}"></h3>
+            </div>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+    </div>
+</body>
+</html>

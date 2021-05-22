@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Кабинет администратора</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <div>
+        <a href="/">Главная</a><br>
+        <a href="/profile">Личный кабинет</a><br>
+        <a href="/shop">Товары</a><br>
+        <a href="/cart">Корзина</a><br>
+        <a href="/logout">Выйти</a>
+    </div>
+    <div>
+        <a href="/actuator">Actuator</a>
+    </div>
+    <div>
+        <h3>Пользователи</h3>
+        <table>
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Email</th>
+                <th scope="col">Роли</th>
+                <th scope="col">Заказы</th>
+            </thead>
+            <th:block th:each="user: ${users}">
+                <tr>
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td>
+                        <th:block th:each="role: ${user.getRoles()}"><a th:text="${role.getName()} + ';'"></a><br></th:block>
+                    </td>
+                    <td>
+                        <th:block th:each="order: ${user.getFinishedOrders()}"><a th:text="${order.getId()} + ';'"></a><br></th:block>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="userId" th:value="${user.getId()}"/>
+                            <input type="hidden" name="action" th:value="deleteUser"/>
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <h3>Заказы</h3>
+        <table>
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Стоимость</th>
+                <th scope="col">Статус оформления</th>
+                <th scope="col">Товары</th>
+            </thead>
+            <th:block th:each="order: ${orders}">
+                <tr>
+                    <td th:text="${order.getId()}"></td>
+                    <td th:text="${order.getPrice()}"></td>
+                    <td th:text="${order.isFinished()}"></td>
+                    <td>
+                        <th:block th:each="item: ${order.getItems()}"><a th:text="${item.getId()} + ';'"></a><br></th:block>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <h3>Товары</h3>
+        <div>
+            <form method="post">
+                <input type="text" name="name" placeholder="Название">
+                <input type="number" step="0.01" name="price" placeholder="Стоимость">
+                <input type="text" name="description" placeholder="Описание">
+                <input type="hidden" name="action" th:value="addItem"/>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Название</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Описание</th>
+            </thead>
+            <th:block th:each="item: ${items}">
+                <tr>
+                    <td th:text="${item.getId()}"></td>
+                    <td th:text="${item.getName()}"></td>
+                    <td th:text="${item.getPrice()}"></td>
+                    <td th:text="${item.getDescription()}"></td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="itemId" th:value="${item.getId()}"/>
+                            <input type="hidden" name="action" th:value="deleteItem"/>
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</body>
+</html>

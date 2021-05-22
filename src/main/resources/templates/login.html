@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Авторизация</title>
+</head>
+<body>
+    <div class="dashboard_rules" sec:authorize="isAuthenticated()">
+        <script language="JavaScript">
+            location.href = '/';
+        </script>
+    </div>
+    <div>
+        <form method="POST" action="/login">
+            <h2>Вход в систему</h2>
+            <div>
+                <label>
+                    <input name="username" type="text" placeholder="Имя" autofocus="true"/>
+                </label>
+                <label>
+                    <input name="password" type="password" placeholder="Пароль"/>
+                </label>
+                <button type="submit" class="btn btn-success">Войти</button><br>
+                <a href="/signUp">Зарегистрироваться</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
