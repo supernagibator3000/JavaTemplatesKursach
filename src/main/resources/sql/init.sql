@@ -35,8 +35,13 @@ create table if not exists orders_table_items(
 );
 
 -- Внести роли в таблицу при первом запуске
--- INSERT INTO roles_table (id, name) VALUES (1, 'ROLE_USER');
--- INSERT INTO roles_table (id, name) VALUES (2, 'ROLE_ADMIN');
+INSERT INTO roles_table (id, name) VALUES (1, 'ROLE_USER');
+INSERT INTO roles_table (id, name) VALUES (2, 'ROLE_ADMIN');
 
--- Сделать user_id админом
--- INSERT INTO users_table_roles (users_id, roles_id) VALUES (user_id, 2);
+-- Сделать админа
+insert into users_table (id, username, password, email) values (0, 'admin', 'admin','javatemplates03@gmail.com');
+INSERT INTO users_table_roles (users_id, roles_id) VALUES (0, 1);
+INSERT INTO users_table_roles (users_id, roles_id) VALUES (0, 2);
+
+create extension if not exists pgcrypto;
+update users_table set password = crypt(password, gen_salt('bf', 10));
