@@ -8,7 +8,8 @@
     <div>
         <div class="dashboard_rules" sec:authorize="!isAuthenticated()">
             <a href="/login">Войти</a><br>
-            <a href="/signUp">Зарегистрироваться</a>
+            <a href="/signUp">Зарегистрироваться</a><br>
+            <a href="/shop">Товары</a><br>
         </div>
         <div class="dashboard_rules" sec:authorize="isAuthenticated()">
             <a href="/profile">Личный кабинет</a><br>
@@ -18,6 +19,10 @@
         </div>
         <div class="dashboard_rules" sec:authorize="hasRole('ADMIN')">
             <a href="/admin">Кабинет администратора</a>
+        </div>
+        <div>
+            <a href="/contacts">Контакты</a><br>
+            <a href="/about">О нас</a><br>
         </div>
     </div>
     <br>

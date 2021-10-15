@@ -6,6 +6,10 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+    <div class="dashboard_rules" sec:authorize="!isAuthenticated()">
+        <a href="/login">Войти</a><br>
+        <a href="/signUp">Зарегистрироваться</a><br>
+    </div>
     <div>
         <a href="/">Главная</a><br>
     </div>
@@ -31,11 +35,13 @@
                     <td th:text="${item.getPrice()}"></td>
                     <td th:text="${item.getDescription()}"></td>
                     <td>
-                        <form method="post">
-                            <input type="hidden" name="itemId" th:value="${item.getId()}"/>
-                            <input type="hidden" name="action" th:value="addToCart"/>
-                            <button type="submit" class="btn btn-danger">Добавить в корзину</button>
-                        </form>
+                        <div class="dashboard_rules" sec:authorize="isAuthenticated()">
+                            <form method="post">
+                                <input type="hidden" name="itemId" th:value="${item.getId()}"/>
+                                <input type="hidden" name="action" th:value="addToCart"/>
+                                <button type="submit" class="btn btn-danger">Добавить в корзину</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             </th:block>

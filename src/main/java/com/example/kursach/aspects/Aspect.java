@@ -18,11 +18,6 @@ public class Aspect {
     @Pointcut("within(com.example.kursach.services.*)")
     public void allServiceMethods(){}
 
-//    @Before("allServiceMethods()")
-//    public void logParameters(JoinPoint joinPoint) {
-//        log.info("Parameters: " + Arrays.toString(joinPoint.getArgs()));
-//    }
-
     @Around("allServiceMethods()")
     public Object timeLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
@@ -35,3 +30,7 @@ public class Aspect {
     }
 }
 
+//    @Before("allServiceMethods()")
+//    public void logParameters(JoinPoint joinPoint) {
+//        log.info("Parameters: " + Arrays.toString(joinPoint.getArgs()));
+//    }
